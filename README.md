@@ -13,5 +13,11 @@ If a single zip file is passed as an argument the contents of the zip file will 
 - [unzip](https://infozip.sourceforge.net/)
 - [mtools](https://www.gnu.org/software/mtools/)
 
+## Nix
+
 A Nix flake & derivation is provided for people with similar brainworms.
+
+```
+nix run github:kaiju/mkfatimg
+```
 
