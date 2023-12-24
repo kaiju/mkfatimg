@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# mkfatimg.sh
+# A simple script to quickly create FAT floppy disk images
+#
+# Author: Josh Mast <josh@mast.zone>
+# URL: https://github.com/kaiju/mkfatimg
+
 if [[ $2 == "" ]]; then
   echo "Usage: $(basename "$0") <disk image> <zip file|files...>"
   exit 85
