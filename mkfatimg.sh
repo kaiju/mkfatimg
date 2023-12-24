@@ -10,7 +10,7 @@ shift
 
 if [[ $# == 1 && "$(file -b --mime-type "$1")" == "application/zip" ]]; then
   zip_file=$1
-  zip_filename=$(basename $zip_file)
+  zip_filename=$(basename "$zip_file")
   mkdir -p "/tmp/$zip_filename"
   unzip -q -d "/tmp/$zip_filename" "$zip_file"
   files=(/tmp/"$zip_filename"/*)
