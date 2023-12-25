@@ -25,7 +25,7 @@ else
 fi
 
 dd if=/dev/zero of="$image_file" bs=512 count=2880 status=none
-mformat -f 1440 -F -i "$image_file" 
+mformat -f 1440 -i "$image_file"
 mcopy -i "$image_file" -s -v "${files[@]}" ::
 
 # Cleanup
