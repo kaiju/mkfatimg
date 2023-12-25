@@ -6,12 +6,31 @@
 # Author: Josh Mast <josh@mast.zone>
 # URL: https://github.com/kaiju/mkfatimg
 
-if [[ $2 == "" ]]; then
-  echo "Usage: $(basename "$0") <disk image> <zip file|files...>"
+mformatargs=("-f" "1440" "-C" "-i")
+
+while getopts ":F" flags
+do
+  case $flags in
+    F) mformatargs=("-F" "${mformatargs[@]}");;
+    *) ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+if [[ $# -ne 2 ]]; then
+  echo "Usage: $(basename "$0") [-F] [disk image] [files ...]"
+  echo ""
+  echo "Positional Arguments:"
+  echo -e "   disk image\t\tDisk image to create"
+  echo -e "   files ...\t\tFiles to add to the disk image. If this is a single zip file, the contents of the zip file will be added to the disk image."
+  echo ""
+  echo "Options:"
+  echo -e "   -F\t\tCreate a FAT32 disk image"
   exit 85
 fi
 
 image_file=$1
+mformatargs+=("$image_file")
 shift
 
 if [[ $# == 1 && "$(file -b --mime-type "$1")" == "application/zip" ]]; then
@@ -24,8 +43,7 @@ else
   files=("$@")
 fi
 
-dd if=/dev/zero of="$image_file" bs=512 count=2880 status=none
-mformat -f 1440 -i "$image_file"
+mformat "${mformatargs[@]}"
 mcopy -i "$image_file" -s -v "${files[@]}" ::
 
 # Cleanup
