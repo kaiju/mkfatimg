@@ -14,6 +14,6 @@ pkgs.stdenv.mkDerivation {
     shellcheck mkfatimg.sh
   '';
   postFixup = ''
-    makeWrapper $out/bin/mkfatimg.sh $out/bin/mkfatimg --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.mtools pkgs.unzip ]}
+    makeWrapper $out/bin/mkfatimg.sh $out/bin/mkfatimg --prefix PATH : ${pkgs.lib.makeBinPath [ pkgs.file pkgs.mtools pkgs.unzip ]}
   '';
 }
