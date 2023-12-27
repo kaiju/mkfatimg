@@ -17,7 +17,7 @@ do
 done
 shift $((OPTIND - 1))
 
-if [[ $# -ne 2 ]]; then
+if [[ $# -lt 2 ]]; then
   echo "Usage: $(basename "$0") [-F] [disk image] [files ...]"
   echo ""
   echo "Positional Arguments:"
